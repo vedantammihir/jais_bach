@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jai's Gays Bach Party — SF 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fog: #f2ede8; --ocean: #1a3a4a; --gold: #c8923a; --rust: #b84c2e;
+    --sage: #7a9e87; --cream: #faf7f2; --ink: #1c1410;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--fog); font-family:'DM Sans',sans-serif; color:var(--ink); }
+
+  /* ── MAIN VIEW ── */
+  #main { display:block; }
+  #detail { display:none; }
+
+  .page { width:780px; margin:32px auto; background:var(--cream); border:1px solid rgba(0,0,0,0.08); box-shadow:0 20px 80px rgba(0,0,0,0.15); }
+
+  .wave-top { width:100%; height:14px; background:linear-gradient(90deg,#ff0018 0%,#ff0018 14.28%,#ff8c00 14.28%,#ff8c00 28.57%,#ffe000 28.57%,#ffe000 42.85%,#028121 42.85%,#028121 57.14%,#004cff 57.14%,#004cff 71.42%,#770088 71.42%,#770088 85.71%,#ff69b4 85.71%,#ff69b4 100%); }
+
+  .header { background:linear-gradient(135deg,#1a0533 0%,#2d0a4e 40%,#0a1a3a 100%); color:white; padding:36px 48px 28px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:0;left:0;right:0; height:6px; background:linear-gradient(90deg,#ff0018 0%,#ff0018 14.28%,#ff8c00 14.28%,#ff8c00 28.57%,#ffe000 28.57%,#ffe000 42.85%,#028121 42.85%,#028121 57.14%,#004cff 57.14%,#004cff 71.42%,#770088 71.42%,#770088 85.71%,#ff69b4 85.71%,#ff69b4 100%); }
+  .header::after { content:'✨ 🌈 💅 👑 ✨ 🎉 💜 ✨'; position:absolute; right:20px; top:18px; font-size:18px; letter-spacing:4px; opacity:0.7; }
+  .rainbow-orb { position:absolute; border-radius:50%; filter:blur(40px); opacity:0.25; }
+  .rainbow-orb.r1 { width:180px;height:180px;background:#ff69b4;right:-30px;bottom:-40px; }
+  .rainbow-orb.r2 { width:120px;height:120px;background:#9b59b6;right:120px;top:-20px;opacity:0.2; }
+  .rainbow-orb.r3 { width:100px;height:100px;background:#00bfff;left:-20px;bottom:-20px;opacity:0.15; }
+  .header-top { display:flex;align-items:flex-start;justify-content:space-between;margin-top:8px; }
+  .city-label { font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px; background:linear-gradient(90deg,#ff69b4,#c084fc,#60a5fa,#34d399,#fbbf24,#f87171); -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+  .header h1 { font-family:'Playfair Display',serif;font-size:54px;line-height:0.95;font-weight:900;letter-spacing:-1px; }
+  .header h1 em { font-style:italic;background:linear-gradient(90deg,#ff69b4 0%,#c084fc 40%,#60a5fa 70%,#f472b6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+  .badge { background:linear-gradient(135deg,#ec4899,#8b5cf6);color:white;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:20px;white-space:nowrap;margin-top:8px;box-shadow:0 0 16px rgba(236,72,153,0.5); }
+  .tagline { margin-top:14px;font-size:13px;font-weight:300;color:rgba(255,255,255,0.7);letter-spacing:0.5px;line-height:1.5; }
+
+  .content { padding:0 48px 40px; }
+  .day-block { margin-top:32px; }
+  .day-header { display:flex;align-items:center;gap:14px;margin-bottom:18px; }
+  .day-pill { background:var(--ocean);color:white;font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;padding:5px 12px;border-radius:2px; }
+  .day-pill.gold { background:var(--gold);color:var(--ocean); }
+  .day-pill.rust { background:var(--rust); }
+  .day-pill.sage { background:var(--sage);color:var(--ocean); }
+  .day-title { font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink); }
+  .day-rule { flex:1;height:1px;background:rgba(0,0,0,0.1); }
+  .stops { display:grid;grid-template-columns:repeat(4,1fr);gap:10px; }
+  .stops-section-label { font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,0.35);margin-bottom:8px; }
+  .stop { background:white;border:1px solid rgba(0,0,0,0.07);padding:14px 14px 12px;cursor:pointer;transition:box-shadow 0.2s,transform 0.15s; }
+  .stop:hover { box-shadow:0 6px 24px rgba(0,0,0,0.12);transform:translateY(-2px); }
+  .stop-time { font-size:9.5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px; }
+  .stop-icon { font-size:22px;margin-bottom:6px;line-height:1; }
+  .stop-name { font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;line-height:1.2;margin-bottom:6px;color:var(--ink); }
+  .stop-desc { font-size:10.5px;font-weight:300;color:#6b5f58;line-height:1.45; }
+  .stop-tag { display:inline-block;margin-top:8px;font-size:9px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:1px; }
+  .tap-hint { font-size:8px;color:#bbb;margin-top:6px;letter-spacing:0.5px; }
+  .tag-nature { background:#e8f0ea;color:#3d6b4a; }
+  .tag-food { background:#fdf0e0;color:#8a5c1a; }
+  .tag-culture { background:#e8eef5;color:#2a4a6a; }
+  .tag-coffee { background:#f5ece8;color:#6a3020; }
+  .tag-walk { background:#edf0e8;color:#4a5a30; }
+  .tip-bar { margin-top:10px;background:#fff9f0;border-left:3px solid var(--gold);padding:8px 12px;font-size:10px;color:#7a5c30;line-height:1.5; }
+  .tip-bar strong { font-weight:500;color:var(--rust); }
+  .divider { height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,0.1),transparent);margin:28px 0 0; }
+  .footer { background:var(--ocean);color:rgba(255,255,255,0.55);padding:14px 48px;font-size:10px;letter-spacing:0.5px;display:flex;justify-content:space-between;align-items:center; }
+  .footer span { color:var(--gold);font-weight:500; }
+
+  /* ── DETAIL VIEW ── */
+  .detail-page { max-width:600px;margin:0 auto;padding:32px 24px 48px; }
+  .back-btn { display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ocean);cursor:pointer;margin-bottom:24px;padding:8px 16px;background:white;border:1px solid rgba(0,0,0,0.1);border-radius:4px; }
+  .back-btn:hover { background:#f0f0f0; }
+  .detail-card { background:white;border:1px solid rgba(0,0,0,0.08);padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.08); }
+  .detail-icon { font-size:48px;margin-bottom:12px; }
+  .detail-day-tag { font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px; }
+  .detail-name { font-family:'Playfair Display',serif;font-size:32px;font-weight:900;line-height:1.1;color:var(--ink);margin-bottom:6px; }
+  .detail-address { font-size:12px;color:#999;margin-bottom:20px; }
+  .detail-divider { height:1px;background:rgba(0,0,0,0.08);margin:20px 0; }
+  .detail-desc { font-size:14px;font-weight:300;color:#4a4040;line-height:1.7;margin-bottom:24px; }
+  .detail-hours { margin-bottom:24px; }
+  .detail-hours h4 { font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px; }
+  .detail-hours p { font-size:12px;color:#6b5f58;line-height:1.8; }
+  .detail-links { display:flex;flex-direction:column;gap:10px; }
+  .detail-link { display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity 0.15s; }
+  .detail-link:hover { opacity:0.85; }
+  .detail-link.maps { background:#4285F4;color:white; }
+  .detail-link.website { background:var(--ocean);color:white; }
+  .detail-link.reservation { background:linear-gradient(135deg,#ec4899,#8b5cf6);color:white; }
+  .detail-link.walkin { background:#e8f5ee;color:#2a7a4a;border:1px solid #b8dfc8; }
+  .detail-link-icon { font-size:18px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ MAIN ITINERARY ══════════════ -->
+<div id="main">
+<div class="page">
+  <div class="wave-top"></div>
+  <div class="header">
+    <div class="rainbow-orb r1"></div><div class="rainbow-orb r2"></div><div class="rainbow-orb r3"></div>
+    <div class="header-top">
+      <div>
+        <div class="city-label">✦ San Francisco ✦</div>
+        <h1>Jai's Gays<br><em>Bach Party</em></h1>
+      </div>
+      <div class="badge">4 Days</div>
+    </div>
+    <div class="tagline">Old-growth redwoods · Wild Pacific coast · World-class food · Iconic neighborhoods</div>
+  </div>
+
+  <div class="content">
+
+    <!-- THU AUG 13 -->
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-pill" style="background:#5b4a7a;">Thu · Aug 13</div>
+        <div class="day-title">Arrival Day</div>
+        <div class="day-rule"></div>
+      </div>
+      <div class="stops" style="grid-template-columns:1fr 1fr 1fr 1fr;">
+        <div class="stop" onclick="showDetail('arrive')">
+          <div class="stop-time" style="color:#7c5cbf;">Whenever You Land</div>
+          <div class="stop-icon">✈️</div>
+          <div class="stop-name">Arrive to SF</div>
+          <div class="stop-desc">Check in, freshen up, and get your bearings. The party starts tonight.</div>
+          <div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" style="background:#f8f5fc;border-style:dashed;border-color:#c4aee8;cursor:default;">
+          <div class="stop-time" style="color:#7c5cbf;">Evening</div>
+          <div class="stop-icon">🍽️</div>
+          <div class="stop-name">Dinner at Spot TBD</div>
+          <div class="stop-desc">To be decided — suggestions welcome!</div>
+        </div>
+        <div class="stop" onclick="showDetail('castro')">
+          <div class="stop-time" style="color:#7c5cbf;">8:00 PM</div>
+          <div class="stop-icon">🏳️‍🌈</div>
+          <div class="stop-name">The Castro & Blackbird</div>
+          <div class="stop-desc">Ease into the trip by doing gay things — grab a nightcap at Blackbird, a literary-themed bar with excellent cocktails and great energy.</div>
+          <span class="stop-tag" style="background:#ede8f8;color:#5b3fa0;">A Quick Drink</span><div class="tap-hint">Tap for details →</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- FRI AUG 14 -->
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-pill gold">Fri · Aug 14</div>
+        <div class="day-title">San Francisco — Neighborhoods &amp; Icons</div>
+        <div class="day-rule"></div>
+      </div>
+      <div class="stops-section-label">Morning</div>
+      <div class="stops">
+        <div class="stop" onclick="showDetail('landsend')">
+          <div class="stop-time">7:00 AM</div><div class="stop-icon">🏔</div>
+          <div class="stop-name">Lands End Trail</div>
+          <div class="stop-desc">Morning walk to the Sutro Baths overlook. Arsicault is a 10 min walk after.</div>
+          <span class="stop-tag tag-walk">Morning Walk</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" onclick="showDetail('arsicault')">
+          <div class="stop-time">8:30 AM</div><div class="stop-icon">🥐</div>
+          <div class="stop-name">Arsicault Bakery</div>
+          <div class="stop-desc">Among the best croissants in the country. You earned it.</div>
+          <span class="stop-tag tag-coffee">Breakfast</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" style="background:#f5f0fa;border-color:#c4aee8;border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:default;">
+          <div style="font-size:18px;">🚗</div>
+          <div style="font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#7c5cbf;margin-top:4px;">Rideshare</div>
+          <div style="font-size:9.5px;color:#6b5f58;margin-top:4px;line-height:1.4;">~10 min to Ferry Building</div>
+        </div>
+        <div class="stop" onclick="showDetail('ferrybldg')">
+          <div class="stop-time">10:30 AM</div><div class="stop-icon">⛵</div>
+          <div class="stop-name">Ferry Building</div>
+          <div class="stop-desc">Browse the marketplace — Dandelion Chocolate, local vendors, farmers market on Saturdays.</div>
+          <span class="stop-tag tag-culture">Market</span><div class="tap-hint">Tap for details →</div>
+        </div>
+      </div>
+      <div class="stops-section-label" style="margin-top:12px;">Midday</div>
+      <div class="stops">
+        <div class="stop" onclick="showDetail('chinatown')">
+          <div class="stop-time">12:00 PM</div><div class="stop-icon">🏮</div>
+          <div class="stop-name">Chinatown</div>
+          <div class="stop-desc">Yank Sing, Z&Y (Michelin Sichuan — spicy!), or Hon's Wun-Ton. Browse the herbalists.</div>
+          <span class="stop-tag tag-culture">Neighborhood</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" style="cursor:default;">
+          <div class="stop-time">2:00 PM</div><div class="stop-icon">🚲</div>
+          <div class="stop-name">Bay Wheels to Wharf</div>
+          <div class="stop-desc">Grab a Bay Wheels e-bike (Lyft app) — flat 1.5 mile ride through North Beach to the Wharf.</div>
+          <span class="stop-tag tag-walk">Bike</span>
+        </div>
+        <div class="stop" onclick="showDetail('ghirardelli')">
+          <div class="stop-time">2:30 PM</div><div class="stop-icon">🍫</div>
+          <div class="stop-name">Ghirardelli Square</div>
+          <div class="stop-desc">Quick stop for a hot fudge sundae before hopping the F-line.</div>
+          <span class="stop-tag tag-food">Treat</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" style="cursor:default;">
+          <div class="stop-time">3:00 PM</div><div class="stop-icon">🚃</div>
+          <div class="stop-name">F-Line to SoMa</div>
+          <div class="stop-desc">Board at Fisherman's Wharf, ride south along the Embarcadero and down Market St. Hop off at 4th &amp; Market.</div>
+          <span class="stop-tag tag-culture">Transit</span>
+        </div>
+        <div class="stop" onclick="showDetail('salesforce')">
+          <div class="stop-time">4:00 PM</div><div class="stop-icon">🌿</div>
+          <div class="stop-name">Salesforce Park</div>
+          <div class="stop-desc">Free rooftop park 70ft above the city. 600 trees, great views, gondola ride up.</div>
+          <span class="stop-tag tag-walk">Park</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" onclick="showDetail('nepa')">
+          <div class="stop-time">7:00 PM</div><div class="stop-icon">🍛</div>
+          <div class="stop-name">Nepa Indian Cuisine <span style="font-size:9px;background:#e8f0f5;color:#2a4a6a;padding:2px 6px;border-radius:10px;font-weight:600;">Walk-in OK</span></div>
+          <div class="stop-desc">North Indian &amp; Nepalese in NoPa. Momos, biryani, tandoori, palak paneer.</div>
+          <span class="stop-tag tag-food">Dinner</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" onclick="showDetail('horsefeather')">
+          <div class="stop-time">9:00 PM</div><div class="stop-icon">🍸</div>
+          <div class="stop-name">Horsefeather</div>
+          <div class="stop-desc">Award-winning NoPa cocktail bar with a skylit atrium. Perfect pre-Castro warm-up.</div>
+          <span class="stop-tag tag-culture">Cocktails</span><div class="tap-hint">Tap for details →</div>
+        </div>
+      </div>
+      <div class="tip-bar">🚃 <strong>F-line tip:</strong> Board at Jones &amp; Beach St · Hop off at 4th &amp; Market · Rideshare to Nepa after &nbsp;·&nbsp; <strong>Z&Y</strong> takes res for 4+ (1 day ahead) &nbsp;·&nbsp; <strong>Yank Sing</strong> recommended to reserve</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SAT AUG 15 -->
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-pill rust">Sat · Aug 15</div>
+        <div class="day-title">Muir Woods &amp; Point Reyes</div>
+        <div class="day-rule"></div>
+      </div>
+      <div class="stops-section-label">Daytime Adventure</div>
+      <div class="stops">
+        <div class="stop" onclick="showDetail('battery')">
+          <div class="stop-time">8:30 AM</div><div class="stop-icon">🌉</div>
+          <div class="stop-name">Battery Spencer</div>
+          <div class="stop-desc">Best overhead view of the Golden Gate — free, just off Hwy 101 north.</div>
+          <span class="stop-tag tag-culture">Viewpoint</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" onclick="showDetail('muirwoods')">
+          <div class="stop-time">9:00 AM</div><div class="stop-icon">🌲</div>
+          <div class="stop-name">Muir Woods</div>
+          <div class="stop-desc">Walk Cathedral Grove, then Dipsea Trail for elevation &amp; views.</div>
+          <span class="stop-tag tag-nature">Nature</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" onclick="showDetail('hogisland')">
+          <div class="stop-time">12:30 PM</div><div class="stop-icon">🦪</div>
+          <div class="stop-name">Hog Island Oysters</div>
+          <div class="stop-desc">Farm-fresh oysters on Tomales Bay with a cold beer. Reserve ahead. <em style="color:#a06030;">Open to suggestions on changing this!</em></div>
+          <span class="stop-tag tag-food">Lunch</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" onclick="showDetail('pointreyes')">
+          <div class="stop-time">2:30 PM</div><div class="stop-icon">🌊</div>
+          <div class="stop-name">Point Reyes</div>
+          <div class="stop-desc">Dramatic lighthouse cliffs, Drakes Beach, and roaming tule elk.</div>
+          <span class="stop-tag tag-nature">Nature</span><div class="tap-hint">Tap for details →</div>
+        </div>
+      </div>
+      <div class="tip-bar">⚠ <strong>Book ahead:</strong> Muir Woods parking sells out weeks in advance at recreation.gov</div>
+      <div class="stops-section-label" style="margin-top:16px;">Evening &amp; Night Out 🎉</div>
+      <div class="stops">
+        <div class="stop" onclick="showDetail('lamar')">
+          <div class="stop-time">7:00 PM</div><div class="stop-icon">🦪</div>
+          <div class="stop-name">La Mar Cocina <span style="font-size:9px;background:#e8f5ee;color:#2a7a4a;padding:2px 6px;border-radius:10px;font-weight:600;">✓ Res</span></div>
+          <div class="stop-desc">Peruvian on the Embarcadero waterfront. Ceviches, pisco sours, bay views.</div>
+          <span class="stop-tag tag-food">Dinner</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" onclick="showDetail('pch')">
+          <div class="stop-time">9:30 PM</div><div class="stop-icon">🍹</div>
+          <div class="stop-name">Pacific Cocktail Haven</div>
+          <div class="stop-desc">North America's 50 Best Bars. Asian Pacific-inspired cocktails. Walk-in only.</div>
+          <span class="stop-tag tag-culture">Cocktails</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" onclick="showDetail('monroe')">
+          <div class="stop-time">11:00 PM</div><div class="stop-icon">🪩</div>
+          <div class="stop-name">Dance the Night</div>
+          <div class="stop-desc">Monroe for Art Deco glam + bottle service, or 1015 Folsom for world-class DJs.</div>
+          <span class="stop-tag tag-culture">Nightlife</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" style="cursor:default;">
+          <div class="stop-time">Late Night</div><div class="stop-icon">🌮</div>
+          <div class="stop-name">Late Night Bites</div>
+          <div class="stop-desc">Grab a burrito on the way home — the Mission never sleeps.</div>
+          <span class="stop-tag tag-food">Fuel Up</span>
+        </div>
+      </div>
+      <div class="tip-bar">🌈 <strong>Bach tip:</strong> Wear something fabulous &nbsp;·&nbsp; <strong>La Mar</strong> — book ahead, fills fast on Saturdays &nbsp;·&nbsp; <strong>Pacific Cocktail Haven</strong> is walk-in only</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SUN AUG 16 -->
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-pill sage">Sun · Aug 16</div>
+        <div class="day-title">Half Day — Goodbyes</div>
+        <div class="day-rule"></div>
+      </div>
+      <div class="stops" style="grid-template-columns:1fr 1fr 1fr;">
+        <div class="stop" onclick="showDetail('sightglass')">
+          <div class="stop-time">9:00 AM</div><div class="stop-icon">☕</div>
+          <div class="stop-name">Sightglass Coffee</div>
+          <div class="stop-desc">Gorgeous industrial SoMa space. One of the city's best roasters.</div>
+          <span class="stop-tag tag-coffee">Coffee</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" onclick="showDetail('deliboard')">
+          <div class="stop-time">11:00 AM</div><div class="stop-icon">🥪</div>
+          <div class="stop-name">Deli Board</div>
+          <div class="stop-desc">Stacked, creative sandwiches in SoMa. Perfect hangover fuel.</div>
+          <span class="stop-tag tag-food">Lunch</span><div class="tap-hint">Tap for details →</div>
+        </div>
+        <div class="stop" style="background:#f0f5f2;border-style:dashed;border-color:var(--sage);cursor:default;">
+          <div class="stop-time" style="color:var(--sage);">Until Departure</div>
+          <div class="stop-icon">👋</div>
+          <div class="stop-name">So Long, San Francisco</div>
+          <div class="stop-desc">One last walk, one last coffee, one last look at the bay. The fog will be here waiting.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">
+    <div>San Francisco, California &nbsp;·&nbsp; <span>Aug 13–16, 2026</span></div>
+    <div>Book Muir Woods parking · Reserve Hog Island &amp; La Mar in advance</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════ DETAIL VIEW ══════════════ -->
+<div id="detail">
+  <div class="detail-page">
+    <div class="back-btn" onclick="goBack()">← Back to Itinerary</div>
+    <div class="detail-card" id="detail-content"></div>
+  </div>
+</div>
+
+<script>
+const stops = {
+  arrive: {
+    icon:'✈️', day:'Thu · Aug 13', name:'Arrive to SF',
+    address:'San Francisco, CA',
+    desc:'Your adventure begins! Check in to your accommodations, freshen up, and soak in the energy of the city. Tonight is free — grab dinner wherever looks good, explore your neighborhood, and get excited. The real fun starts tomorrow.',
+    hours: null,
+    maps:'https://www.google.com/maps/place/San+Francisco,+CA',
+    website:null, reservation:null
+  },
+  landsend: {
+    icon:'🏔', day:'Fri · Aug 14 · 7:00 AM', name:'Lands End Trail',
+    address:'Point Lobos Ave, San Francisco, CA 94121',
+    desc:'One of SF\'s most stunning and underrated walks. Follow the coastal trail to the Sutro Baths overlook for jaw-dropping views of the Golden Gate Bridge and the Pacific. The ruins of the Sutro Baths sit dramatically by the sea. Do the short version (out to the overlook and back, ~1 mile, 30 min) and Arsicault Bakery is just a 10-min walk away — the perfect reward. Almost no crowds this early.',
+    hours:'Open 24 hours daily',
+    maps:'https://www.google.com/maps/place/Sutro+Baths,+1004+Point+Lobos+Ave,+San+Francisco',
+    website:'https://www.nps.gov/goga/planyourvisit/landsend.htm', reservation:null
+  },
+  arsicault: {
+    icon:'🥐', day:'Fri · Aug 14 · 8:30 AM', name:'Arsicault Bakery',
+    address:'397 Arguello Blvd, San Francisco, CA 94118',
+    desc:'Widely considered one of the best croissants in the United States. Named America\'s best bakery by Bon Appétit, Arsicault is a tiny Inner Richmond gem that draws a loyal morning crowd. Get the butter croissant, the chocolate almond, or the kouign-amann. The line moves fast. Open at 8am — go early before they sell out.',
+    hours:'Mon–Fri: 8am–3pm · Sat–Sun: 8am–3:30pm',
+    maps:'https://www.google.com/maps/place/Arsicault+Bakery,+397+Arguello+Blvd,+San+Francisco',
+    website:null, reservation:null
+  },
+  ferrybldg: {
+    icon:'⛵', day:'Fri · Aug 14 · 10:30 AM', name:'Ferry Building Marketplace',
+    address:'1 Ferry Building, San Francisco, CA 94105',
+    desc:'A San Francisco landmark on the Embarcadero waterfront. The ground floor is lined with some of the best local food vendors in the city — Dandelion Chocolate (get a drinking chocolate), Cowgirl Creamery, Blue Bottle Coffee, and more. If you\'re there on a Saturday, the Farmers Market outside is exceptional. A great spot to browse, graze, and soak in the bay views.',
+    hours:'Mon–Sun: 7am–8pm',
+    maps:'https://www.google.com/maps/place/Ferry+Building,+1+Ferry+Building,+San+Francisco',
+    website:'https://www.ferrybuildingmarketplace.com', reservation:null
+  },
+  chinatown: {
+    icon:'🏮', day:'Fri · Aug 14 · 12:00 PM', name:'Chinatown',
+    address:'Grant Ave, San Francisco, CA 94108',
+    desc:'The oldest Chinatown in North America and one of the most densely populated neighborhoods in the US. Wander down Grant Avenue, duck into herbal medicine shops, browse produce markets, and stop for lunch. Three great options nearby — tap any restaurant below for maps, hours, and reservations.',
+    hours:'Neighborhood is always accessible',
+    maps:'https://www.google.com/maps/place/Chinatown,+San+Francisco,+CA',
+    website:null, reservation:null,
+    subplaces: [
+      {
+        name:'Yank Sing',
+        emoji:'🥟',
+        desc:'Upscale Cantonese dim sum — the nicest of the three. Har gow, siu mai, XLB. Reservation recommended.',
+        hours:'Tue–Fri: 11am–3pm · Sat–Sun: 10am–3pm · Closed Mon',
+        maps:'https://www.google.com/maps/place/Yank+Sing,+49+Stevenson+St,+San+Francisco',
+        website:'https://yanksing.com',
+        reservation:'https://www.opentable.com/yank-sing'
+      },
+      {
+        name:'Z & Y Restaurant',
+        emoji:'🌶️',
+        desc:'Michelin Bib Gourmand Sichuan. Bold, fiery, and authentic. Peking duck and tea-smoked dishes are standouts. Reservations for groups of 4+.',
+        hours:'Mon & Wed–Sun: 11:30am–3pm & 4:30–9pm · Closed Tue',
+        maps:'https://www.google.com/maps/place/Z+%26+Y+Restaurant,+655+Jackson+St,+San+Francisco',
+        website:'http://www.zandyrestaurant.com',
+        reservation:'https://www.opentable.com/z-and-y-restaurant'
+      },
+      {
+        name:"Hon's Wun-Tun House",
+        emoji:'🍜',
+        desc:'The casual, cheap backup. Cash-only Cantonese spot famous for wonton soup and salt & pepper wings. No reservations needed.',
+        hours:'Mon–Sat: 11am–7:30pm · Closed Sun',
+        maps:'https://www.google.com/maps/place/Hon%27s+Wun-Tun+House,+648+Kearny+St,+San+Francisco',
+        website:null,
+        reservation:'walkin'
+      }
+    ]
+  },
+  ghirardelli: {
+    icon:'🍫', day:'Fri · Aug 14 · 2:30 PM', name:'Ghirardelli Square',
+    address:'900 North Point St, San Francisco, CA 94109',
+    desc:'A San Francisco icon — the original Ghirardelli chocolate factory, now a waterfront plaza with shops and a chocolate experience. This is a quick stop: pop in for a World Famous Hot Fudge Sundae (genuinely worth it), enjoy the bay view, and then walk one block to board the F-line streetcar. The chocolate shop alone is worth a wander.',
+    hours:'Mon–Thu & Sun: 9am–10pm · Fri–Sat: 9am–11pm',
+    maps:'https://www.google.com/maps/place/Ghirardelli+Square,+900+North+Point+St,+San+Francisco',
+    website:'https://www.ghirardellisq.com', reservation:null
+  },
+  salesforce: {
+    icon:'🌿', day:'Fri · Aug 14 · 4:30 PM', name:'Salesforce Park',
+    address:'425 Mission St, San Francisco, CA 94105 (top of Salesforce Transit Center)',
+    desc:'One of SF\'s most unexpected hidden gems. A free, beautifully landscaped park perched 70 feet above street level on top of the Salesforce Transit Center. Take the gondola or elevator up and find 600 trees, a beer garden, an amphitheater, and panoramic city views. It\'s usually calm and uncrowded — a perfect place to relax and people-watch before dinner.',
+    hours:'Daily: 6am–8pm (gondola and elevator access)',
+    maps:'https://www.google.com/maps/place/Salesforce+Park,+425+Mission+St,+San+Francisco',
+    website:'https://salesforcetransitcenter.com/park/', reservation:null
+  },
+  nepa: {
+    icon:'🍛', day:'Fri · Aug 14 · 7:30 PM', name:'Nepa Indian Cuisine',
+    address:'507 Divisadero St, San Francisco, CA 94117',
+    desc:'A beloved NoPa neighborhood restaurant serving North Indian and Nepalese cuisine. Famous for their momos (Nepalese dumplings), biryani, palak paneer, and tandoori dishes. The dining room is large, the vibe is warm and casual, and getting a table is easy — no reservation needed. Exceptional value. The owner and staff are known for being incredibly welcoming.',
+    hours:'Mon–Sun: 11am–12am',
+    maps:'https://www.google.com/maps/place/Nepa+Indian+Cuisine,+507+Divisadero+St,+San+Francisco',
+    website:null,
+    reservation:'walkin'
+  },
+  horsefeather: {
+    icon:'🍸', day:'Fri · Aug 14 · 9:30 PM', name:'Horsefeather',
+    address:'528 Divisadero St, San Francisco, CA 94117',
+    desc:'One of SF\'s most lauded cocktail bars, right in NoPa on Divisadero — literally steps from Nepa. A stunning semi-outdoor atrium with a massive skylight floods the space with atmosphere. The cocktails are excellent and creative, the snacks (duck fat fries, gochujang wings) are some of the best bar food in the city. A perfect warm-up before the Castro.',
+    hours:'Mon–Thu: 2pm–12am · Fri: 2pm–2am · Sat: 11am–2am · Sun: 11am–12am',
+    maps:'https://www.google.com/maps/place/Horsefeather+SF,+528+Divisadero+St,+San+Francisco',
+    website:'https://www.horsefeathersf.com', reservation:null
+  },
+  castro: {
+    icon:'🏳️‍🌈', day:'Fri · Aug 14 · Late Night', name:'The Castro',
+    address:'Castro St, San Francisco, CA 94114',
+    desc:'One of the world\'s most famous LGBTQ+ neighborhoods, and an SF institution. The Castro has a legendary bar scene, great energy, and iconic spots around every corner. The historic Castro Theatre anchors the neighborhood. For nightcaps, head to Blackbird (literary-themed, excellent cocktails, reliable and fun) or explore whatever catches your eye.',
+    hours:'Neighborhood accessible anytime — bars typically open until 2am',
+    maps:'https://www.google.com/maps/place/The+Castro,+San+Francisco,+CA',
+    website:null, reservation:null
+  },
+  battery: {
+    icon:'🌉', day:'Sat · Aug 15 · 8:30 AM', name:'Battery Spencer',
+    address:'Conzelman Rd, Sausalito, CA 94965',
+    desc:'The best view of the Golden Gate Bridge in the Bay Area — period. A former military battery in the Marin Headlands, just off Hwy 101 north of the bridge. From here you look DOWN on the Golden Gate, seeing its full span with SF in the background. It\'s free, easy to access, and almost magical at sunrise. Don\'t skip it on the drive to Muir Woods.',
+    hours:'Open 24 hours (some seasonal restrictions — check ahead)',
+    maps:'https://www.google.com/maps/place/Battery+Spencer,+Conzelman+Rd,+Sausalito,+CA',
+    website:'https://www.nps.gov/goga/planyourvisit/marin-headlands.htm', reservation:null
+  },
+  muirwoods: {
+    icon:'🌲', day:'Sat · Aug 15 · 9:00 AM', name:'Muir Woods National Monument',
+    address:'Mill Valley, CA 94941',
+    desc:'A cathedral of ancient coast redwoods just 12 miles north of San Francisco. Walking among these 1,000-year-old trees is one of the most awe-inspiring experiences in the Bay Area. The main Cathedral Grove loop is easy and flat (1 mile). For more adventure, take the Dipsea Trail for elevation, ocean views, and real hiking. ⚠️ Parking MUST be reserved in advance at recreation.gov — it sells out weeks ahead on weekends.',
+    hours:'Daily: 8am–8pm (hours vary seasonally)',
+    maps:'https://www.google.com/maps/place/Muir+Woods+National+Monument,+Mill+Valley,+CA',
+    website:'https://www.nps.gov/muwo',
+    reservation:'https://gomuirwoods.com/'
+  },
+  hogisland: {
+    icon:'🦪', day:'Sat · Aug 15 · 12:30 PM', name:'Hog Island Oyster General Store',
+    address:'20215 Shoreline Hwy, Marshall, CA 94940',
+    desc:'One of the great California coastal lunches. Hog Island is a legendary oyster farm right on Tomales Bay — you buy fresh oysters by the dozen, grab picnic tables by the water, shuck them yourself, and wash them down with a cold beer or white wine. The setting is absolutely stunning. Reserve a table online — walk-ups are possible but not guaranteed on weekends. 💬 <em>We\'re open to suggestions on swapping this out — let us know if you have a better idea for lunch on the Point Reyes drive!</em>',
+    hours:'Daily: 9am–5pm',
+    maps:'https://www.google.com/maps/place/Hog+Island+Oyster+General+Store,+20215+Shoreline+Hwy,+Marshall',
+    website:'https://hogislandoysters.com',
+    reservation:'https://hogislandoysters.com/pages/tomales-bay-farm-store'
+  },
+  pointreyes: {
+    icon:'🌊', day:'Sat · Aug 15 · 2:30 PM', name:'Point Reyes National Seashore',
+    address:'Point Reyes Station, CA 94956',
+    desc:'A vast, wild stretch of protected coastline about an hour north of SF. Drive to the Point Reyes Lighthouse for dramatic 300-foot cliffs above the Pacific — spectacular on clear days. Stop at Drakes Beach for a walk on the sand, and keep an eye out for the free-roaming tule elk herds near Pierce Point Road. One of the most beautiful places in Northern California.',
+    hours:'Lighthouse: Thu–Mon 10am–4:30pm · Park open daily',
+    maps:'https://www.google.com/maps/place/Point+Reyes+National+Seashore',
+    website:'https://www.nps.gov/pore', reservation:null
+  },
+  lamar: {
+    icon:'🦪', day:'Sat · Aug 15 · 7:00 PM', name:'La Mar Cocina Peruana',
+    address:'Pier 1½, The Embarcadero N, San Francisco, CA 94111',
+    desc:'SF\'s premier Peruvian restaurant, dramatically situated on a pier on the Embarcadero with sweeping bay views. Chef Gastón Acurio\'s acclaimed ceviche bar is the heart of the menu — the Clásico ceviche is a must. Wash it down with a perfectly sour pisco sour. The space is beautiful, the energy is festive, and it\'s a perfect bachlorette dinner spot. Reserve well ahead — it fills up fast on Saturdays.',
+    hours:'Mon–Sat: 11:30am–2:30pm & 5–9pm (Fri–Sat until 9:30pm) · Sun: 11:30am–9pm',
+    maps:'https://www.google.com/maps/place/La+Mar+Cocina+Peruana+San+Francisco',
+    website:'https://lamarsf.com',
+    reservation:'https://www.opentable.com/la-mar-cebicheria-peruana'
+  },
+  pch: {
+    icon:'🍹', day:'Sat · Aug 15 · 9:30 PM', name:'Pacific Cocktail Haven',
+    address:'550 Sutter St, San Francisco, CA 94108',
+    desc:'Named to North America\'s 50 Best Bars list, Pacific Cocktail Haven (PCH) is one of the most exciting cocktail destinations in the country. The menu leans into Asian Pacific ingredients — think calamansi, guava, pandan, and shochu — in beautifully crafted cocktails. The space is warm and welcoming with a gorgeous front patio. Walk-in only — no reservations accepted — so arrive early or be prepared to wait.',
+    hours:'Tue–Sat: 5pm–12am · Sun–Mon: Closed',
+    maps:'https://www.google.com/maps/place/Pacific+Cocktail+Haven,+550+Sutter+St,+San+Francisco',
+    website:'https://www.pacificcocktailhaven.com', reservation:null
+  },
+  monroe: {
+    icon:'🪩', day:'Sat · Aug 15 · 11:00 PM', name:'Monroe SF (or 1015 Folsom)',
+    address:'473 Broadway, San Francisco, CA 94133',
+    desc:'Two great options for dancing the night away. Monroe SF is a gorgeous Art Deco-inspired nightclub in North Beach with DJs, dancing, bottle service, and a glamorous vibe — perfect for a bachelorette. Open Fri 5pm–2am & Sat 10pm–2am. Alternatively, 1015 Folsom is one of the most legendary dance clubs in the world — a SoMa institution with top-tier DJs, multiple rooms, and serious dance-floor energy.',
+    hours:'Monroe: Fri 5pm–2am · Sat 10pm–2am',
+    maps:'https://www.google.com/maps/place/Monroe+SF,+473+Broadway,+San+Francisco',
+    website:'https://www.monroesf.com', reservation:null
+  },
+  sightglass: {
+    icon:'☕', day:'Sun · Aug 16 · 9:00 AM', name:'Sightglass Coffee',
+    address:'270 7th St, San Francisco, CA 94103',
+    desc:'One of San Francisco\'s best third-wave coffee roasters, housed in a stunning converted industrial loft in SoMa. Soaring ceilings, natural light, and beautifully crafted single-origin coffees. A perfect spot for a slow, unhurried last morning — order a cortado or a pour-over and take your time. They also have great pastries.',
+    hours:'Mon–Fri: 6:30am–5pm · Sat–Sun: 7am–5pm',
+    maps:'https://www.google.com/maps/place/Sightglass+Coffee,+270+7th+St,+San+Francisco',
+    website:'https://sightglasscoffee.com', reservation:null
+  },
+  deliboard: {
+    icon:'🥪', day:'Sun · Aug 16 · 11:00 AM', name:'Deli Board',
+    address:'1058 Folsom St, San Francisco, CA 94103',
+    desc:'Famous for towering, generously stacked sandwiches that have developed a cult following in SF. The 49er (pastrami, brisket, corned beef) is legendary. Cash only, no phone orders, line can get long — arrive right at 11am opening. It\'s a short walk from Sightglass, making for a perfect Sunday send-off combo. Note: closed Mondays.',
+    hours:'Tue–Sun: 11am–3pm · Closed Mondays',
+    maps:'https://www.google.com/maps/place/Deli+Board,+1058+Folsom+St,+San+Francisco',
+    website:null, reservation:null
+  }
+};
+
+function showDetail(id) {
+  const s = stops[id];
+  if (!s) return;
+  let linksHtml = `<a class="detail-link maps" href="${s.maps}" target="_blank"><span class="detail-link-icon">📍</span> Open in Google Maps</a>`;
+  if (s.website) linksHtml += `<a class="detail-link website" href="${s.website}" target="_blank"><span class="detail-link-icon">🌐</span> Visit Website</a>`;
+  if (s.reservation === 'walkin') {
+    linksHtml += `<div class="detail-link walkin"><span class="detail-link-icon">✅</span> Walk-ins welcome — no reservation needed</div>`;
+  } else if (s.reservation) {
+    linksHtml += `<a class="detail-link reservation" href="${s.reservation}" target="_blank"><span class="detail-link-icon">🗓</span> Make a Reservation</a>`;
+  }
+
+  let subplacesHtml = '';
+  if (s.subplaces) {
+    subplacesHtml = '<div class="detail-divider"></div><div class="detail-hours"><h4>Restaurant Options</h4></div>';
+    s.subplaces.forEach(sp => {
+      let spLinks = `<a class="detail-link maps" href="${sp.maps}" target="_blank" style="font-size:11px;padding:8px 12px;"><span class="detail-link-icon" style="font-size:14px;">📍</span> Google Maps</a>`;
+      if (sp.website) spLinks += `<a class="detail-link website" href="${sp.website}" target="_blank" style="font-size:11px;padding:8px 12px;"><span class="detail-link-icon" style="font-size:14px;">🌐</span> Website</a>`;
+      if (sp.reservation === 'walkin') {
+        spLinks += `<div class="detail-link walkin" style="font-size:11px;padding:8px 12px;"><span class="detail-link-icon" style="font-size:14px;">✅</span> Walk-in OK</div>`;
+      } else if (sp.reservation) {
+        spLinks += `<a class="detail-link reservation" href="${sp.reservation}" target="_blank" style="font-size:11px;padding:8px 12px;"><span class="detail-link-icon" style="font-size:14px;">🗓</span> Reserve</a>`;
+      }
+      subplacesHtml += `
+        <div style="background:#f8f6f2;border:1px solid rgba(0,0,0,0.08);border-radius:4px;padding:16px;margin-bottom:12px;">
+          <div style="font-size:20px;margin-bottom:6px;">${sp.emoji}</div>
+          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:4px;">${sp.name}</div>
+          <div style="font-size:11px;color:#6b5f58;line-height:1.5;margin-bottom:8px;">${sp.desc}</div>
+          <div style="font-size:10px;color:#999;margin-bottom:10px;">🕐 ${sp.hours}</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">${spLinks}</div>
+        </div>`;
+    });
+  }
+
+  const hoursHtml = s.hours ? `<div class="detail-hours"><h4>Hours</h4><p>${s.hours}</p></div><div class="detail-divider"></div>` : '';
+  document.getElementById('detail-content').innerHTML = `
+    <div class="detail-icon">${s.icon}</div>
+    <div class="detail-day-tag">${s.day}</div>
+    <div class="detail-name">${s.name}</div>
+    <div class="detail-address">📍 ${s.address}</div>
+    <div class="detail-divider"></div>
+    <div class="detail-desc">${s.desc}</div>
+    ${hoursHtml}
+    <div class="detail-links">${linksHtml}</div>
+    ${subplacesHtml}
+  `;
+  document.getElementById('main').style.display = 'none';
+  document.getElementById('detail').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+function goBack() {
+  document.getElementById('detail').style.display = 'none';
+  document.getElementById('main').style.display = 'block';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
